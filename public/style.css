@@ -1,0 +1,424 @@
+/* ============================================
+   PANEL DE ADMINISTRACIÓN - GESTIÓN DE PRODUCTOS
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e20;
+    background-color: #f0f4ed;
+}
+
+/* ============================================
+   ENCABEZADO ADMIN
+   ============================================ */
+.encabezado {
+    background: linear-gradient(135deg, #2d5016 0%, #3d6625 100%);
+    color: #ffffff;
+    padding: 24px 0;
+    box-shadow: 0 4px 20px rgba(45, 80, 22, 0.3);
+}
+
+.contenedor-encabezado {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nombre-panaderia {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.nombre-panaderia span {
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 5px;
+    opacity: 0.95;
+    color: #d4e8c8;
+}
+
+.navegacion-admin {
+    display: flex;
+    gap: 16px;
+}
+
+.boton-nav {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 12px 24px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.boton-nav:hover {
+    background: #ffffff;
+    color: #2d5016;
+    border-color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   CONTENEDOR PRINCIPAL
+   ============================================ */
+.contenedor-principal {
+    max-width: 1400px;
+    margin: 48px auto;
+    padding: 0 24px;
+}
+
+.titulo-seccion {
+    font-size: 2rem;
+    color: #2d5016;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+}
+
+.boton-agregar {
+    background: linear-gradient(135deg, #38a169 0%, #48bb78 100%);
+    color: #ffffff;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.boton-agregar:hover {
+    background: linear-gradient(135deg, #2f855a 0%, #38a169 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(56, 161, 105, 0.4);
+}
+
+/* ============================================
+   TABLA DE PRODUCTOS
+   ============================================ */
+.tabla-panes {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(45, 80, 22, 0.12);
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla thead {
+    background: linear-gradient(135deg, #c8e6ba 0%, #d4e8c8 100%);
+}
+
+.tabla th {
+    padding: 18px 16px;
+    text-align: left;
+    font-weight: 700;
+    color: #2d5016;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabla td {
+    padding: 18px 16px;
+    border-bottom: 1px solid #f0f4ed;
+    color: #2c3e20;
+}
+
+.tabla tbody tr:hover {
+    background: #f8fdf5;
+}
+
+.tabla tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ============================================
+   ACCIONES DE TABLA
+   ============================================ */
+.columna-acciones {
+    display: flex;
+    gap: 10px;
+}
+
+.editarProducto {
+    background: linear-gradient(135deg, #3182ce 0%, #4299e1 100%);
+    color: #ffffff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.editarProducto:hover {
+    background: linear-gradient(135deg, #2c5282 0%, #3182ce 100%);
+    transform: translateY(-2px);
+}
+
+.eliminarProducto {
+    background: linear-gradient(135deg, #c53030 0%, #e53e3e 100%);
+    color: #ffffff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.eliminarProducto:hover {
+    background: linear-gradient(135deg, #a02020 0%, #c53030 100%);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   MODAL
+   ============================================ */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(45, 80, 22, 0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.modal.activo {
+    display: flex;
+}
+
+.contenido-modal {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 550px;
+    box-shadow: 0 24px 64px rgba(45, 80, 22, 0.4);
+}
+
+.titulo-modal {
+    font-size: 1.8rem;
+    color: #2d5016;
+    margin-bottom: 24px;
+    font-weight: 700;
+}
+
+/* ============================================
+   FORMULARIO DEL MODAL
+   ============================================ */
+.formulario-pan {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.grupo-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.etiqueta-campo {
+    font-weight: 600;
+    color: #5a6f4e;
+    font-size: 0.95rem;
+}
+
+.campo-texto,
+.campo-numero,
+.campo-textarea {
+    padding: 12px 14px;
+    border: 2px solid #d0d9cc;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s;
+}
+
+.campo-texto:focus,
+.campo-numero:focus,
+.campo-textarea:focus {
+    outline: none;
+    border-color: #4a7c2e;
+    background: #f8fdf5;
+    box-shadow: 0 0 0 3px rgba(74, 124, 46, 0.1);
+}
+
+.campo-textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+}
+
+.campo-archivo {
+    padding: 12px;
+    border: 2px dashed #c8e6ba;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: #f8fdf5;
+}
+
+.campo-archivo:hover {
+    border-color: #4a7c2e;
+    background: #ffffff;
+}
+
+/* ============================================
+   BOTONES DEL MODAL
+   ============================================ */
+.botones-modal {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.boton-guardar {
+    flex: 1;
+    background: linear-gradient(135deg, #38a169 0%, #48bb78 100%);
+    color: #ffffff;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.boton-guardar:hover {
+    background: linear-gradient(135deg, #2f855a 0%, #38a169 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(56, 161, 105, 0.4);
+}
+
+.boton-editar {
+    flex: 1;
+    background: linear-gradient(135deg, #3182ce 0%, #4299e1 100%);
+    color: #ffffff;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+
+.boton-editar:hover {
+    background: linear-gradient(135deg, #2c5282 0%, #3182ce 100%);
+    transform: translateY(-2px);
+}
+
+.boton-eliminar {
+    flex: 1;
+    background: linear-gradient(135deg, #c53030 0%, #e53e3e 100%);
+    color: #ffffff;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+
+.boton-eliminar:hover {
+    background: linear-gradient(135deg, #a02020 0%, #c53030 100%);
+    transform: translateY(-2px);
+}
+
+.boton-cancelar {
+    flex: 1;
+    background: #d0d9cc;
+    color: #2c3e20;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+
+.boton-cancelar:hover {
+    background: #c0c9bc;
+    transform: translateY(-1px);
+}
+
+/* ============================================
+   BADGE DE PRECIO
+   ============================================ */
+.precio {
+    color: #38a169;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .contenedor-encabezado {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .navegacion-admin {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .boton-nav {
+        text-align: center;
+    }
+
+    .titulo-seccion {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .tabla-panes {
+        overflow-x: auto;
+    }
+
+    .tabla {
+        min-width: 700px;
+    }
+
+    .columna-acciones {
+        flex-direction: column;
+    }
+
+    .contenido-modal {
+        padding: 24px;
+    }
+}
