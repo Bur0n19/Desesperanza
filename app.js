@@ -8,8 +8,8 @@ const session = require('express-session');
 
 const app = express();
 
-// --- 2. CONEXIÓN A LA BD (MODIFICADA CON AWAIT) ---
-let con; // declaramos la variable global
+
+let con; 
 
 (async () => {
     try {
@@ -24,7 +24,7 @@ let con; // declaramos la variable global
         await insertarCategoriasIniciales();
         await crearTablasPedidos();
     } catch (err) {
-        console.log('❌ Error conectando:', err);
+        console.log(' Error conectando:', err);
     }
 })();
 
@@ -102,7 +102,7 @@ app.use(express.static('public'))
 
 // Configurar sesiones
 app.use(session({
-    secret: 'panaderia-secreta-2025',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 24 * 60 * 60 * 1000 }
