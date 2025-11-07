@@ -14,10 +14,10 @@ let con; // declaramos la variable global
 (async () => {
     try {
         con = await mysql.createConnection({
-            host: 'bur0n19.bullnodes.com',
-            user: 'bur0n19bullnodes_root',
-            password: 'P4ntr019_',
-            database: 'bur0n19bullnodes_panaderia'
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME
         });
 
         console.log('✓ Conectado a la BD');
