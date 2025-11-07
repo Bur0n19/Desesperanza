@@ -1,5 +1,5 @@
 /* ============================================
-   LOGIN/REGISTRO - VERSIÓN CON BANNER LATERAL
+   ARCHIVO 4: REGISTRO - DISEÑO SPLIT SCREEN MODERNO
    ============================================ */
 
 * {
@@ -9,180 +9,325 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #2d5016 0%, #4a7c2e 100%);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    background: #064e3b;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    overflow: hidden;
+    position: relative;
 }
 
-.container {
-    background: #ffffff;
-    border-radius: 24px;
-    box-shadow: 0 24px 64px rgba(45, 80, 22, 0.3);
-    overflow: hidden;
-    max-width: 950px;
-    width: 100%;
-    display: flex;
+body::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    bottom: -300px;
+    left: -300px;
+    animation: pulse 15s ease-in-out infinite;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(5, 150, 105, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    top: -200px;
+    right: -200px;
+    animation: pulse 20s ease-in-out infinite reverse;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
 }
 
 /* ============================================
-   BANNER LATERAL
+   CONTENEDOR SPLIT
+   ============================================ */
+.container {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 32px;
+    box-shadow: 
+        0 50px 120px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(16, 185, 129, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    overflow: hidden;
+    max-width: 1100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   LADO IZQUIERDO - BRANDING
    ============================================ */
 .banner {
-    background: linear-gradient(135deg, #2d5016 0%, #3d6625 100%);
-    padding: 64px 48px;
-    flex: 1;
+    background: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%);
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    top: -200px;
+    left: -100px;
+}
+
+.banner::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    bottom: -150px;
+    right: -150px;
+}
+
+.banner h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 900;
     color: #ffffff;
+    letter-spacing: -1.5px;
+    position: relative;
+    z-index: 1;
+    line-height: 1.1;
+}
+
+.banner p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+    max-width: 400px;
+}
+
+/* ============================================
+   LADO DERECHO - FORMULARIO
+   ============================================ */
+.form-container {
+    padding: 60px 50px;
+    background: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.banner h1 {
-    font-size: 2.6rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-.banner p {
-    font-size: 1.1rem;
-    opacity: 0.95;
-    line-height: 1.7;
-    color: #d4e8c8;
-}
-
-/* ============================================
-   FORMULARIO
-   ============================================ */
-.form-container {
-    padding: 64px 48px;
-    flex: 1;
-}
-
 .form-container h2 {
-    color: #2d5016;
+    color: #064e3b;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: -0.8px;
+}
+
+.subtitle {
+    color: #6b7280;
     margin-bottom: 32px;
-    font-size: 2.1rem;
-    font-weight: 700;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    font-weight: 500;
 }
 
 .form-group {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
-    color: #5a6f4e;
-    font-weight: 600;
-    font-size: 0.95rem;
+    margin-bottom: 10px;
+    color: #047857;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
 }
 
 .form-group input {
     width: 100%;
-    padding: 14px 16px;
-    border: 2px solid #d0d9cc;
-    border-radius: 10px;
+    padding: 15px 18px;
+    border: 2px solid #d1fae5;
+    border-radius: 14px;
     font-size: 1rem;
-    transition: all 0.3s;
-    background: #ffffff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #f0fdf4;
+    color: #064e3b;
+    font-weight: 500;
+}
+
+.form-group input::placeholder {
+    color: #9ca3af;
+    font-weight: 400;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: #4a7c2e;
-    background: #f8fdf5;
-    box-shadow: 0 0 0 3px rgba(74, 124, 46, 0.1);
+    border-color: #10b981;
+    background: #ffffff;
+    box-shadow: 
+        0 0 0 4px rgba(16, 185, 129, 0.12),
+        0 8px 20px rgba(16, 185, 129, 0.15);
+    transform: translateY(-2px);
 }
 
 /* ============================================
-   BOTONES
+   BOTONES MODERNOS
    ============================================ */
 .btn {
     width: 100%;
     padding: 16px;
     border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: 700;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 800;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::after {
+    width: 400px;
+    height: 400px;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #4a7c2e 0%, #5a9639 100%);
+    background: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%);
     color: #ffffff;
     margin-bottom: 16px;
+    box-shadow: 
+        0 4px 16px rgba(16, 185, 129, 0.3),
+        0 0 0 1px rgba(16, 185, 129, 0.2);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #3d6625 0%, #4a7c2e 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(74, 124, 46, 0.35);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 28px rgba(16, 185, 129, 0.4),
+        0 0 0 1px rgba(16, 185, 129, 0.3);
 }
 
 .btn-secondary {
-    background: #f0f4ed;
-    color: #2c3e20;
-    margin-bottom: 12px;
+    background: #ecfdf5;
+    color: #047857;
+    border: 2px solid #d1fae5;
+    margin-bottom: 16px;
 }
 
 .btn-secondary:hover {
-    background: #e8f5e3;
-    transform: translateY(-1px);
+    background: #d1fae5;
+    border-color: #10b981;
+    transform: translateY(-2px);
 }
 
 .btn-link {
     background: none;
-    color: #4a7c2e;
-    text-decoration: underline;
+    color: #059669;
+    text-decoration: none;
     padding: 12px;
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    border-radius: 10px;
 }
 
 .btn-link:hover {
-    color: #3d6625;
+    color: #047857;
+    background: #f0fdf4;
 }
 
 /* ============================================
-   ALERTAS Y MENSAJES
+   ALERTAS ELEVADAS
    ============================================ */
-.error {
-    background: #ffebee;
-    color: #c53030;
-    padding: 14px 16px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+.error,
+.success {
+    padding: 16px 20px;
+    border-radius: 14px;
+    margin-bottom: 24px;
     display: none;
-    border-left: 4px solid #c53030;
-    font-weight: 500;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-left: 4px solid;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    animation: slideInDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.error {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #991b1b;
+    border-left-color: #dc2626;
 }
 
 .success {
-    background: #e8f5e3;
-    color: #2d5016;
-    padding: 14px 16px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    display: none;
-    border-left: 4px solid #4a7c2e;
-    font-weight: 500;
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #065f46;
+    border-left-color: #10b981;
 }
 
 /* ============================================
-   DIVISOR
+   DIVISOR MINIMALISTA
    ============================================ */
 .divider {
     text-align: center;
-    margin: 24px 0;
-    color: #a5c998;
+    margin: 28px 0;
+    color: #9ca3af;
     position: relative;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 }
 
 .divider::before,
@@ -190,9 +335,9 @@ body {
     content: '';
     position: absolute;
     top: 50%;
-    width: 44%;
-    height: 1px;
-    background: #d0d9cc;
+    width: 40%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #d1fae5 50%, transparent 100%);
 }
 
 .divider::before {
@@ -206,24 +351,61 @@ body {
 /* ============================================
    RESPONSIVE
    ============================================ */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .container {
-        flex-direction: column;
+        grid-template-columns: 1fr;
+        max-width: 550px;
     }
 
     .banner {
-        padding: 48px 32px;
+        padding: 48px 40px;
+        order: -1;
     }
 
     .banner h1 {
-        font-size: 2rem;
+        font-size: 2.25rem;
     }
 
     .form-container {
-        padding: 48px 32px;
+        padding: 48px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        border-radius: 24px;
+    }
+
+    .banner {
+        padding: 40px 28px;
+    }
+
+    .banner h1 {
+        font-size: 1.9rem;
+    }
+
+    .banner p {
+        font-size: 0.95rem;
+    }
+
+    .form-container {
+        padding: 40px 28px;
     }
 
     .form-container h2 {
-        font-size: 1.8rem;
+        font-size: 1.65rem;
+    }
+
+    .form-group input {
+        padding: 14px 16px;
+    }
+
+    .btn {
+        padding: 14px;
+        font-size: 0.9rem;
     }
 }
